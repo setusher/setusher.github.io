@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Shradha Thakur · Portfolio
 
-## Getting Started
+Personal portfolio site: Next.js (App Router) + TypeScript + Tailwind CSS v4, exported as a fully
+static site and hosted on GitHub Pages at **https://setusher.github.io**.
 
-First, run the development server:
+## Run locally
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev            # http://localhost:3000  (use -- -p 3125 for another port)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Checks and build
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run lint
+npm run typecheck
+npm run build          # static export to ./out
+npx serve out          # or: python3 -m http.server -d out 8080
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Deploy (GitHub Pages)
 
-## Learn More
+The repo is `setusher/setusher.github.io`, a user site, so it is served at the domain root and needs
+no `basePath`.
 
-To learn more about Next.js, take a look at the following resources:
+1. In the repo settings, open **Pages** and set **Source** to **GitHub Actions**.
+2. Push to `main`. `.github/workflows/deploy.yml` lints, type-checks, builds and publishes `out/`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+`public/.nojekyll` stops GitHub Pages from ignoring the `_next/` folder.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Editing content
 
-## Deploy on Vercel
+All copy lives in [`src/lib/content.ts`](src/lib/content.ts): bio, stats, skills, projects,
+experience and links. Open TODOs:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `site.linkedin`: LinkedIn URL. LinkedIn links stay hidden while it is empty.
+- `site.email`: confirm the public email (currently the one on the GitHub profile).
+- `site.resume`: put the PDF at `public/resume.pdf` and set this to `"/resume.pdf"`. The
+  "Download Resume" button in About appears once it is set.
+- ShySnap has no link because its repo is private.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The contact form has no backend. Submitting opens the visitor's mail app with the message filled
+in, addressed to `site.email`.
+
+## Structure
+
+```
+src/app/            layout (fonts, metadata), page, globals.css (tokens and effects), icon.svg
+src/components/     Sidebar, Hero, Section frame, About, Skills, Work, Experience, Contact, Footer
+src/lib/content.ts  all site content
+src/lib/ribbon.ts   generative ribbon renderer (pure canvas code)
+src/lib/ribbon.worker.ts  runs the renderer off the main thread on an OffscreenCanvas
+```
+
+## Notes
+
+- **Hero art**: 240 thin threads follow a Catmull-Rom spine and twist around it like a silk
+  ribbon, with a small tail ending in a glint. It draws in a Web Worker when the browser supports
+  `OffscreenCanvas`, and on the main thread otherwise. It runs at about 30 fps, starts after the
+  page loads, pauses when the tab is hidden or the hero is off screen, and shows a single still
+  frame under `prefers-reduced-motion`.
+- **Decorative code tags** (`<h1>`, `</html>` …) are drawn with CSS `content: attr(data-tag)`
+  and `aria-hidden`, so they are not page text.
+- **Motion**: section reveals, the hero line reveal, the bobbing arrow and the tag flicker are
+  all turned off under `prefers-reduced-motion`.
