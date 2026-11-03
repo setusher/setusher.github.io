@@ -6,7 +6,7 @@ export const site = {
   role: "Software Developer",
   url: "https://setusher.github.io",
   description:
-    "Shradha Thakur: full stack developer building AI and agentic systems. Electrical Engineering at IIT Roorkee.",
+    "Shradha Thakur: software developer building AI and agentic systems. Electrical Engineering at IIT Roorkee.",
   email: "shradhath08@gmail.com",
   github: "https://github.com/setusher",
   // TODO(shradha): add LinkedIn profile URL. Links using it stay hidden while this is empty.
@@ -25,7 +25,7 @@ export const nav = [
 
 export const about = {
   paragraphs: [
-    "I'm a third-year Electrical Engineering student at IIT Roorkee (B.Tech, 2024 to 2028). I build full-stack products and agentic AI systems, from voice agents and RAG pipelines to the web apps people use every day.",
+    "I'm a third-year Electrical Engineering student at IIT Roorkee (B.Tech, 2024 to 2028). I build products and agentic AI systems, from voice agents and RAG pipelines to the web apps people use every day.",
     "I'm a Project Associate at IMG, IIT Roorkee, where I work on campus enterprise apps, and I was an Executive Member of the ACM Student Chapter. I won silver medals at the 14th Inter-IIT Tech Meet (ISRO Geospatial problem statement) and at Hack-a-tone 2025, organized by IIT Delhi.",
   ],
   stats: [
@@ -143,24 +143,6 @@ export const experience = [
       "Agentic voice and WhatsApp booking agents (Python, LiveKit, Gemini APIs).",
       "Low-latency multilingual telephony pipelines with Deepgram STT and Cartesia TTS.",
       "Next.js + Nest.js operational dashboards.",
-    ],
-  },
-  {
-    org: "IMG, IIT Roorkee",
-    role: "Project Associate",
-    period: "Feb 2025 to Present",
-    bullets: [
-      "Led full-stack development for campus enterprise apps serving 5,000+ users.",
-      "Optimized backend and DB queries to handle 3,000+ concurrent users.",
-    ],
-  },
-  {
-    org: "ACM Student Chapter, IIT Roorkee",
-    role: "Executive Member",
-    period: "Apr 2025 to Mar 2026",
-    bullets: [
-      "Organized contests, hackathons and open-source workshops for 500+ participants.",
-      "Mentored junior developers.",
     ],
   },
 ];
