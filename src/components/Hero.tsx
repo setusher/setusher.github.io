@@ -22,10 +22,7 @@ export function Hero() {
           </span>
           <span className="hero-line block" style={{ "--i": 1 } as React.CSSProperties}>
             I&apos;m <Duo char="S" />
-            hradha,
-          </span>
-          <span className="hero-line block" style={{ "--i": 2 } as React.CSSProperties}>
-            full stack developer
+            hradha.
             <CodeTag tag="</h1>" className="ml-4 align-middle tracking-normal" />
           </span>
         </h1>
@@ -33,12 +30,12 @@ export function Hero() {
         <CodeTag tag="< p >" className="mt-7 block -ml-3" />
         <p
           className="hero-line mt-3 text-[13px] uppercase tracking-[0.2em] text-muted-2 md:text-[14px]"
-          style={{ "--i": 3 } as React.CSSProperties}
+          style={{ "--i": 2 } as React.CSSProperties}
         >
-          AI &amp; Agentic Systems / Full Stack Developer
+          AI &amp; Agentic Systems / Software Developer
         </p>
 
-        <div className="hero-line mt-[50px]" style={{ "--i": 4 } as React.CSSProperties}>
+        <div className="hero-line mt-[50px]" style={{ "--i": 3 } as React.CSSProperties}>
           <a href="#contact" className="btn-outline">
             Contact me!
           </a>

@@ -12,7 +12,7 @@ const jetbrains = JetBrains_Mono({
   display: "swap",
 });
 
-const title = `${site.name} · Full Stack & AI Developer`;
+const title = `${site.name} · Software Developer, AI & Agentic Systems`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
