@@ -77,6 +77,7 @@ export function RibbonCanvas() {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let w = 0;
     let h = 0;
+    let artTop = 0; // narrow screens: y where the hero text ends and the art may begin
     let raf = 0;
     let running = false;
     let onScreen = true;
@@ -107,13 +108,15 @@ export function RibbonCanvas() {
       canvas.width = Math.round(w * dpr);
       canvas.height = Math.round(h * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const text = canvas.parentElement?.querySelector("[data-hero-content]");
+      artTop = text ? text.getBoundingClientRect().bottom - rect.top : h * 0.5;
       if (!running) draw(reduceMotion ? 4 : performance.now() / 1000);
     };
 
     // Map normalised spine coordinates into pixels. On narrow screens the art moves into the
-    // lower half of the hero so it doesn't sit on top of the headline.
+    // space below the hero text so it never sits on top of the headline or button.
     const mapX = (x: number) => (w < 768 ? (0.02 + (x - 0.28) * 1.35) * w : x * w);
-    const mapY = (y: number) => (w < 768 ? (0.52 + y * 0.48) * h : y * h);
+    const mapY = (y: number) => (w < 768 ? artTop + (y - 0.1) * (h - artTop) * 1.05 : y * h);
 
     function strokeBand(
       path: Float32Array,

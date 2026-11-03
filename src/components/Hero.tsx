@@ -6,7 +6,7 @@ const pad = "pl-[clamp(24px,4vw,64px)]";
 
 export function Hero() {
   return (
-    <section id="top" aria-label="Introduction" className="relative min-h-[100svh] overflow-hidden">
+    <section id="top" aria-label="Introduction" className="relative min-h-[100svh] overflow-hidden pb-[min(380px,60vw)] md:pb-0">
       <RibbonCanvas />
 
       <div className={`pointer-events-none absolute top-[76px] md:top-6 ${pad} flex flex-col gap-1.5`}>
@@ -14,7 +14,7 @@ export function Hero() {
         <CodeTag tag="<body>" />
       </div>
 
-      <div className={`relative z-10 ${pad} pr-6 pt-[max(25svh,120px)] md:pt-[25vh]`}>
+      <div data-hero-content className={`relative z-10 ${pad} pr-6 pt-[max(25svh,120px)] md:pt-[25vh]`}>
         <CodeTag tag="<h1>" className="mb-3 block -ml-3" />
         <h1 className="text-[clamp(40px,6.2vw,96px)] font-extrabold leading-[0.95] tracking-[-0.03em] text-white">
           <span className="hero-line block" style={{ "--i": 0 } as React.CSSProperties}>
