@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://setusher.github.io/sitemap.xml
