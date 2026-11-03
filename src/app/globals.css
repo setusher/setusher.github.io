@@ -1,26 +1,201 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #1d1d1f;
+  --bg-sidebar: #1a1a1a;
+  --panel: #232325;
+  --line: #2f2f2f;
+  --text: #ffffff;
+  --muted: #9a9a9a;
+  --muted-2: #8d8d8d;
+  --tag: #3f3f3f;
+  --mint: #5eead4;
+  --pink: #f43f6e;
+  --sidebar-w: 95px;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--bg);
+  --color-sidebar: var(--bg-sidebar);
+  --color-panel: var(--panel);
+  --color-line: var(--line);
+  --color-muted: var(--muted);
+  --color-muted-2: var(--muted-2);
+  --color-tag: var(--tag);
+  --color-mint: var(--mint);
+  --color-pink: var(--pink);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+html {
+  background: var(--bg);
+  color-scheme: dark;
+  scrollbar-width: thin;
+  scrollbar-color: var(--pink) #151516;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--pink);
+  color: #fff;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #151516;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--pink);
+  border-radius: 4px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--mint);
+  outline-offset: 3px;
+}
+
+section[id] {
+  scroll-margin-top: 72px;
+}
+@media (min-width: 768px) {
+  section[id] {
+    scroll-margin-top: 0;
+  }
+}
+
+/* ---------- Two-tone (mint | pink) glitch letter ---------- */
+.duo {
+  position: relative;
+  display: inline-block;
+  color: transparent;
+}
+.duo::before,
+.duo::after {
+  content: attr(data-char);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.duo::before {
+  color: var(--mint);
+  clip-path: inset(0 50% 0 0);
+}
+.duo::after {
+  color: var(--pink);
+  clip-path: inset(0 0 0 50%);
+  transform: translate(var(--duo-shift, 0.04em), calc(var(--duo-shift, 0.04em) * -0.6));
+}
+
+/* ---------- Decorative code tags (rendered via CSS so they are not DOM text) ---------- */
+.code-tag::before {
+  content: attr(data-tag);
+}
+.code-tag {
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  font-style: italic;
+  font-size: 12px;
+  line-height: 1;
+  color: var(--tag);
+  user-select: none;
+  pointer-events: none;
+  white-space: pre;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .code-tag {
+    animation: tag-flicker 7s ease-in-out infinite;
+  }
+  .code-tag:nth-of-type(2n) {
+    animation-delay: -2.3s;
+  }
+  .code-tag:nth-of-type(3n) {
+    animation-delay: -4.1s;
+  }
+}
+@keyframes tag-flicker {
+  0%, 100% { opacity: 1; }
+  45% { opacity: 0.55; }
+  50% { opacity: 0.9; }
+  55% { opacity: 0.6; }
+}
+
+/* ---------- Hero line reveal ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-line {
+    opacity: 0;
+    transform: translateY(0.25em);
+    animation: hero-in 600ms cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+    animation-delay: calc(var(--i, 0) * 110ms + 80ms);
+  }
+}
+@keyframes hero-in {
+  to { opacity: 1; transform: none; }
+}
+
+/* ---------- Scroll-down arrow bob ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .bob {
+    animation: bob 1.8s ease-in-out infinite;
+  }
+}
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
+}
+
+/* ---------- Section reveal on scroll (only when JS is running) ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-reveal] {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 400ms ease-out, transform 400ms ease-out;
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  .js [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- Outlined mint button with corner square ---------- */
+.btn-outline {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 32px;
+  border: 1px solid var(--mint);
+  color: var(--mint);
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  background: transparent;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+.btn-outline::after {
+  content: "";
+  position: absolute;
+  right: -3px;
+  bottom: -3px;
+  width: 6px;
+  height: 6px;
+  background: var(--mint);
+}
+.btn-outline:hover,
+.btn-outline:focus-visible {
+  background: var(--mint);
+  color: #111;
 }
