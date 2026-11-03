@@ -24,8 +24,7 @@ npx serve out          # or: python3 -m http.server -d out 8080
 The repo is `setusher/setusher.github.io`, a user site, so it is served at the domain root and needs
 no `basePath`.
 
-1. In the repo settings, open **Pages** and set **Source** to **GitHub Actions**.
-2. Push to `main`. `.github/workflows/deploy.yml` lints, type-checks, builds and publishes `out/`.
+Pages is set to build from **GitHub Actions**. Every push to `main` deploys: `.github/workflows/deploy.yml` lints, type-checks, builds and publishes `out/`.
 
 `public/.nojekyll` stops GitHub Pages from ignoring the `_next/` folder.
 
@@ -35,7 +34,6 @@ All copy lives in [`src/lib/content.ts`](src/lib/content.ts): bio, stats, skills
 experience and links. Open TODOs:
 
 - `site.linkedin`: LinkedIn URL. LinkedIn links stay hidden while it is empty.
-- `site.email`: confirm the public email (currently the one on the GitHub profile).
 - `site.resume`: put the PDF at `public/resume.pdf` and set this to `"/resume.pdf"`. The
   "Download Resume" button in About appears once it is set.
 - ShySnap has no link because its repo is private.
