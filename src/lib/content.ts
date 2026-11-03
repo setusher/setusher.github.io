@@ -7,7 +7,6 @@ export const site = {
   url: "https://setusher.github.io",
   description:
     "Shradha Thakur: full stack developer building AI and agentic systems. Electrical Engineering at IIT Roorkee.",
-  // TODO(shradha): confirm the public email. Taken from the GitHub profile.
   email: "shradhath08@gmail.com",
   github: "https://github.com/setusher",
   // TODO(shradha): add LinkedIn profile URL. Links using it stay hidden while this is empty.
@@ -109,16 +108,6 @@ export const projects: Project[] = [
       "Firebase Auth/Firestore plus a Flask backend for server-side image processing.",
     ],
     // TODO(shradha): the repo (setusher/Face-Blur-Snap-Sharing-App) is private, so no link is shown.
-  },
-  {
-    name: "BhatakBot",
-    period: "Jul to Aug 2025",
-    tech: ["Node.js", "Express", "EJS", "Firebase", "Wit.ai", "OpenRouteService", "Python"],
-    bullets: [
-      "Multilingual travel assistant with voice/chat route guidance and cab booking routing.",
-      "Dynamic AI travel checklist generation and session persistence.",
-    ],
-    github: "https://github.com/Bhavi-1266/Bhatak_bot",
   },
 ];
 
